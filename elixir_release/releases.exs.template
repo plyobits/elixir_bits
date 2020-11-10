@@ -1,0 +1,35 @@
+import Config
+
+
+database_url =
+  System.get_env("DATABASE_URL") ||
+    raise """
+    environment variable DATABASE_URL is missing.
+    For example: ecto://USER:PASS@HOST/DATABASE
+    """
+
+config :${APP}, ${ROOT_CONTEXT}.Repo,
+  # ssl: true,
+  url: database_url,
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+
+
+config :${APP}, ${ROOT_CONTEXT}Web.Endpoint,
+  secret_key_base: System.fetch_env!("SECRET_KEY_BASE"),
+  live_view: [
+    signing_salt: System.fetch_env!("LIVEVIEW_SALT")
+  ]
+
+check_origin = fn ->
+  case System.fetch_env("CHECK_ORIGIN") do
+    {:ok, str} -> String.split(str, ",")
+    _ -> false
+  end
+end
+
+config :${APP}, ${ROOT_CONTEXT}Web.Endpoint,
+  http: [:inet6, port: System.get_env("PORT") || 4000],
+  url: [host: System.fetch_env!("HOSTNAME"), port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  check_origin: check_origin.(),
+  server: true
