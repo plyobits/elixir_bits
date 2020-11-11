@@ -22,6 +22,11 @@ RUN set -xe \
       && cd /usr/local/src/elixir \
       && make install clean
 
+
+#Support basic native stuff as well
+RUN set -xe \
+      && apk add git build-base autoconf automake make libtool
+
 # Install hex and rebar
 RUN mix local.hex --force && \
     mix local.rebar --force
@@ -31,9 +36,13 @@ RUN mkdir /app
 WORKDIR /app
 
 # Copy over all the necessary application files and directories
-COPY config ./config
+#For umbrella app
+#COPY apps ./apps
+#For standard app
 COPY lib ./lib
 COPY priv ./priv
+
+COPY config ./config
 COPY mix.exs .
 COPY mix.lock .
 
