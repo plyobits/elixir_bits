@@ -25,7 +25,7 @@ RUN set -xe \
 
 #Support basic native stuff as well
 RUN set -xe \
-      && apk add git build-base autoconf automake make libtool
+      && apk add nodejs npm git build-base autoconf automake make libtool
 
 # Install hex and rebar
 RUN mix local.hex --force && \
@@ -46,9 +46,18 @@ COPY config ./config
 COPY mix.exs .
 COPY mix.lock .
 
+COPY rel ./rel
+
+
 # Fetch the application dependencies and build the application
 RUN mix deps.get
 RUN mix deps.compile
+
+#Standard phoenix setup
+RUN (cd assets/ && rm -rf ./node_modules && npm install && npm run deploy)
+#Umbrella
+#RUN (cd apps/%{APP_NAME}_web/assets/ && rm -rf ./node_modules && npm install && npm run deploy)
+
 RUN mix phx.digest
 RUN mix release
 
