@@ -20,6 +20,7 @@ config :${APP}, ${ROOT_CONTEXT}Web.Endpoint,
     signing_salt: System.fetch_env!("LIVEVIEW_SALT")
   ]
 
+#example:  "//*.hello.plyobits.dk,//*.plyobits.dk"
 check_origin = fn ->
   case System.fetch_env("CHECK_ORIGIN") do
     {:ok, str} -> String.split(str, ",")

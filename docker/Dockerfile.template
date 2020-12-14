@@ -38,9 +38,11 @@ WORKDIR /app
 # Copy over all the necessary application files and directories
 #For umbrella app
 #COPY apps ./apps
+#
 #For standard app
 COPY lib ./lib
 COPY priv ./priv
+COPY assets ./assets
 
 COPY config ./config
 COPY mix.exs .
