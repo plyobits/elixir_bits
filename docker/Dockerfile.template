@@ -2,8 +2,8 @@
 FROM erlang:23-alpine AS app_builder
 
 ENV UPDATED_AT=${TIMESTAMP}
-ENV ELIXIR_VERSION=1.11.2
-ENV ELIXIR_DOWNLOAD_SHA256="318f0a6cb372186b0cf45d2e9c9889b4c9e941643fd67ca0ab1ec32710ab6bf5"
+ENV ELIXIR_VERSION=1.11.4
+ENV ELIXIR_DOWNLOAD_SHA256="85c7118a0db6007507313db5bddf370216d9394ed7911fe80f21e2fbf7f54d29"
 
 # Set environment variables for building the application
 ENV MIX_ENV=prod 
@@ -58,7 +58,7 @@ RUN mix deps.compile
 #Standard phoenix setup
 RUN (cd assets/ && rm -rf ./node_modules && npm install && npm run deploy)
 #Umbrella
-#RUN (cd apps/%{APP_NAME}_web/assets/ && rm -rf ./node_modules && npm install && npm run deploy)
+#RUN (cd apps/${APP_NAME}_web/assets/ && rm -rf ./node_modules && npm install && npm run deploy)
 
 RUN mix phx.digest
 RUN mix release
