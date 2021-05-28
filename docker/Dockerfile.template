@@ -70,7 +70,7 @@ FROM alpine:3.12 AS app
 ENV LANG=C.UTF-8
 
 # Install openssl
-RUN apk update && apk add openssl ncurses-libs
+RUN apk update && apk add openssl ncurses-libs libgcc libstdc++
 
 WORKDIR /app
 COPY --from=app_builder /app/_build/prod/rel .
