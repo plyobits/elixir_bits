@@ -2,8 +2,8 @@
 FROM erlang:24-alpine AS app_builder
 
 ENV UPDATED_AT=${TIMESTAMP}
-ENV ELIXIR_VERSION=1.12
-ENV ELIXIR_DOWNLOAD_SHA256="92650866355e7b295ab32f4edd0bf5c7faf2417548cab6b7485d78d9d2aac9c3"
+ENV ELIXIR_VERSION=1.12.1
+ENV ELIXIR_DOWNLOAD_SHA256="96167d614b9c483efc54bd7898c3eea4768569a77dd8892ada85d7800d5e3ea4"
 
 # Set environment variables for building the application
 ENV MIX_ENV=prod 
@@ -25,7 +25,7 @@ RUN set -xe \
 
 #Support basic native stuff as well
 RUN set -xe \
-      && apk add nodejs npm git build-base autoconf automake make libtool
+      && apk add nodejs npm git build-base autoconf automake make libtool python3
 
 # Install hex and rebar
 RUN mix local.hex --force && \
