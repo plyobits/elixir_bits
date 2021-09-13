@@ -41,7 +41,7 @@ COPY . ./
 # Fetch the application dependencies and build the application
 RUN mix deps.get
 RUN mix deps.compile
-RUN mix esbuild.install
+RUN MIX_ENV=dev mix esbuild.install
 
 #Standard phoenix setup
 #RUN (cd assets/ && rm -rf ./node_modules && npm install && npm run deploy)
