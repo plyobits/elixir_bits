@@ -39,7 +39,7 @@ if config_env() == :prod do
   ext_port = System.get_env("EXTERNAL_PORT") || 443
 
 
-  config :${APP}, ${ROOT_CONTEXT}Web.Endpoint,
+  config :${APP}_web, ${ROOT_CONTEXT}Web.Endpoint,
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
