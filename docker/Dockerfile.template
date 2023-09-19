@@ -1,9 +1,9 @@
 # ---- Build Stage ----
-FROM erlang:24-alpine AS app_builder
+FROM erlang:25-alpine AS app_builder
 
 ENV UPDATED_AT=${TIMESTAMP}
-ENV ELIXIR_VERSION=1.12.3
-ENV ELIXIR_DOWNLOAD_SHA256="c5affa97defafa1fd89c81656464d61da8f76ccfec2ea80c8a528decd5cb04ad"
+ENV ELIXIR_VERSION=1.15.5
+ENV ELIXIR_DOWNLOAD_SHA256="69f6203eded2d5b2d246c807528f896b3d352141c9cf3e095762748d677c7260"
 
 # Set environment variables for building the application
 ENV MIX_ENV=prod 
